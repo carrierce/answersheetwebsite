@@ -2,4 +2,6 @@
   <p>{{ user.name }}</p>
   <p>{{ user.email }}</p>
   <p>{{ user.password }}</p>
+  <p>{{ user._id }}</p>
+  <button class="btn btn-small btn-danger" (click)="delUser(user._id)">Delete User</button>
 </div>

@@ -32,4 +32,13 @@ router.post('/', (req, res, next) => {
   });
 });
 
+router.delete('/:id', (req, res, next) => {
+  User.findByIdAndRemove(req.params.id, (err, post) => {
+    if (err) {
+      return next(err);
+    }     
+    res.json(post);
+  });
+});
+
 module.exports = router;

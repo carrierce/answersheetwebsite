@@ -17,4 +17,8 @@ export class UsersComponent implements OnInit {
     });
   }
 
+  delUser(id) {
+    this.api.deleteUser(id).subscribe((res) => console.log(res));
+  }
+
 }
