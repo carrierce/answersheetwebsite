@@ -21,6 +21,11 @@ export class UserapiService {
     return this.http.get(apiUrl, httpOptions);
   }
 
+  getSingleUser(id): Observable<any> {
+    const getUser = apiUrl + '/' + id;
+    return this.http.get(getUser, httpOptions);
+  }
+
   postUser(data): Observable<any> {
     return this.http.post(apiUrl, data, httpOptions);
   }
