@@ -10,6 +10,7 @@ import { UsersComponent } from './users/users.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { UserCreateComponent } from './user-create/user-create.component';
 import { FormsModule } from '@angular/forms';
+import { TestsCreateComponent } from './tests-create/tests-create.component';
 
 // Below we specify the frontend routes,
 // this is an array of all front-end routes.
@@ -17,6 +18,10 @@ const appRoutes: Routes = [
   {
     path: 'tests',
     component: TestsComponent
+  },
+  {
+    path: 'tests-create',
+    component: TestsCreateComponent
   },
   {
     path: 'users',
@@ -45,7 +50,8 @@ const appRoutes: Routes = [
     TestsComponent,
     UsersComponent,
     UserDetailComponent,
-    UserCreateComponent
+    UserCreateComponent,
+    TestsCreateComponent
   ],
   imports: [
     BrowserModule,

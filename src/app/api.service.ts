@@ -6,7 +6,7 @@ const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
-const apiUrl = '/api/reading';
+const apiUrl = '/api/exams';
 
 @Injectable({
   providedIn: 'root'

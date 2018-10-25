@@ -1,0 +1,21 @@
+<div class="container">
+  <h1>User</h1>
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit()" #f="ngForm">
+
+    <button class="btn btn-success btn-sm" click="">TRY CLICKING</button>
+    <div formArrayName="questions">
+        <div *ngFor="let question of myForm.get('questions').controls; let i=index">
+          <input type="text"
+                    class="form-control"
+                    id="answer"
+                    placeholder="Answer"
+                    name="answer"
+                    formControlName="answer"
+                    required>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+
+  </form>
+</div>
+

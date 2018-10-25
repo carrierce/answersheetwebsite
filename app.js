@@ -1,14 +1,10 @@
-// REQUIRES go here 
-// Top 4 are all in the node module folder
 const express = require('express');
 const path = require('path');
 const logger = require('morgan');
 const mongoose = require('mongoose');
-const readingAPI = require('./routes/reading');
+const examsAPI = require('./routes/exams');
 const usersAPI = require('./routes/users');
 
-// INITIALIZE express
-  // express is a class with a ton of methods & below instantiate an object of this class.
 const app = express();
 
 // MIDDLEWARE:
@@ -26,7 +22,7 @@ app.use(express.static(path.join(__dirname, 'dist/AnswerSheetWebsite')));
   // this concatents __dirname with what comes after:  'dist/AnswerSheetWebsite'
   // dirname is the name of the whole folder system
 
-app.use('/api/reading', readingAPI);
+app.use('/api/exams', examsAPI);
   // our first exception to the '/' path if we get '/api/reading' go to readingAPI
   // anytime we get a request to '/api/reading' we want to review the 
   // routing inside routes/reading.js
