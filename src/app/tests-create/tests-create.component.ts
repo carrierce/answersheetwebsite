@@ -16,15 +16,31 @@ export class TestsCreateComponent implements OnInit {
     this.examForm = this.fb.group({
       examType: '',
       name: '',
-      sections: this.fb.array([{
-        sectionType: '',
-        questions: this.fb.array([{
-          answer: ''
-        }])
-      }])
+      sections: this.fb.array([
+        this.fb.group({
+          sectionType: '',
+          questions: this.fb.array([
+            this.fb.group({
+              answer: ''
+            })
+          ])
+        })
+      ])
+      // sections: this.fb.array([{
+      //   sectionType: 'Section Type',
+      //   questions: this.fb.array([{
+      //     answer: 'Answer'
+      //   }])
+      // }])
     });
-    this.examForm.valueChanges.subscribe(console.log);
+    // this.examForm.valueChanges.subscribe(console.log);
   }
+
+  get examSections() {
+    return this.examForm.get('sections') as FormArray;
+  }
+
+
 
 }
 

@@ -1,7 +1,20 @@
 <div class="container">
   <h1>User</h1>
-  <form [formGroup]="myForm">
-
+  <form [formGroup]="examForm">
+    Value: {{ examForm.value | json }}
+    <hr>
+    <input placeholder="Exam Type" formControlName="examType">
+    <input placeholder="Test Name" formControlName="name">
+    <div formArrayName="sections">
+      <div *ngFor="let section of examSections.controls; let i = index" [formGroupName]="i">
+        <input placeholder="Section Type" formControlName="sectionType">
+        <div formArrayName="questions">
+          <div *ngFor="let question of examForm?.controls?.sections?.controls?.questions.controls; let j = index" [formGroupName]="j">
+            <input placeholder="Enter Answer Choice" formControlName="answers">
+          </div>
+        </div>  
+      </div>  
+    </div>
   </form>
 </div>
 
