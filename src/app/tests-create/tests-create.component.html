@@ -17,7 +17,12 @@
       </mat-form-field>
       
       <div formArrayName="sections" class="exam-form-sections">
+        <!-- We need to use get because there are special, irregular objects
+        so we need to use .get a special function created by formgroup to get the inner values
+        We use. controls because we need to access inside the sections -->
         <div *ngFor="let section of examForm.get('sections').controls; let i = index" [formGroupName]="i">
+          <!-- mat is angular material-- which is an equivalent of bootstrap, but specifically 
+          for angular. these have error handling/formating etc built in -->
           <mat-form-field>
             <input matInput placeholder="Section Type" formControlName="sectionType">
           </mat-form-field>
