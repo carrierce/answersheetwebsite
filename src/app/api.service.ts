@@ -17,5 +17,9 @@ export class ApiService {
   getTests(): Observable<any> {
     return this.http.get(apiUrl, httpOptions);
   }
+
+  postTest(exam): Observable<any> {
+    return this.http.post(apiUrl, exam, httpOptions);
+  }
 }
 

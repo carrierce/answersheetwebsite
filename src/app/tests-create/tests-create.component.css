@@ -1,6 +1,7 @@
 .exam-form {
     display: flex;
     flex-direction: column;
+    margin-bottom: 5px;
 }
 
 .exam-form-sections {

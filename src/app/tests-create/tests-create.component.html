@@ -1,10 +1,13 @@
 <div class="container">
-  <form [formGroup]="examForm">
+  <form [formGroup]="examForm" [hidden]="success" (ngSubmit)="submitHandler()">
     Value: {{ examForm.value | json }}
     <hr>
     <div class="exam-form">
       <mat-form-field>
         <input matInput placeholder="Exam Type" formControlName="examType">
+        <mat-error *ngIf="examType.invalid && examType.touched">
+          Exam type should not be empty
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <input matInput placeholder="Test Name" formControlName="name">
@@ -21,17 +24,22 @@
                 <mat-label>{{ j + 1 }}</mat-label>
                 <input matInput placeholder="Enter Answer Choice" formControlName="answer">
               </mat-form-field>
-              <button mat-raised-button color="warn" (click)="deleteQuestion(section.controls.questions, j)">Delete Question</button><br>
+              <button type="button" mat-raised-button color="warn" (click)="deleteQuestion(section.controls.questions, j)">Delete Question</button><br>
             </div>
           </div>
           <div class="exam-form-lower-buttons">
-            <button mat-raised-button color="primary" (click)="addNewQuestion(section.controls.questions)">Add question</button>  
-            <button mat-raised-button color="warn" (click)="deleteSection(i)">Delete Section</button>
+            <button type="button" mat-raised-button color="primary" (click)="addNewQuestion(section.controls.questions)">Add question</button>  
+            <button type="button" mat-raised-button color="warn" (click)="deleteSection(i)">Delete Section</button>
           </div>
         </div>  
       </div>
-      <button mat-raised-button color="primary" (click)="addNewSection()">New section</button>
+      <button type="button" mat-raised-button color="primary" (click)="addNewSection()">New section</button>
     </div>
+    <button mat-raised-button color="primary" type="submit"
+      [disabled]="examForm.invalid">Submit</button>
   </form>
+  <div *ngIf="success" class="form-submitted-message">
+    <h3>Your form has been successfully submitted. Please refresh the page if you want to submit another form.</h3>
+  </div>
 </div>
 
