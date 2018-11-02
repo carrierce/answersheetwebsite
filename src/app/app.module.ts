@@ -12,6 +12,8 @@ import { UserCreateComponent } from './user-create/user-create.component';
 import { FormsModule } from '@angular/forms';
 import { TestsCreateComponent } from './tests-create/tests-create.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatFormFieldModule, MatButtonModule, MatInputModule } from '@angular/material';
 
 // Below we specify the frontend routes,
 // this is an array of all front-end routes.
@@ -58,8 +60,12 @@ const appRoutes: Routes = [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [ ApiService, UserapiService ],
   bootstrap: [AppComponent]

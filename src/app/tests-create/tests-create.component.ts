@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { componentNeedsResolution } from '@angular/core/src/metadata/resource_loading';
 
 @Component({
   selector: 'app-tests-create',
@@ -8,53 +7,56 @@ import { componentNeedsResolution } from '@angular/core/src/metadata/resource_lo
   styleUrls: ['./tests-create.component.css']
 })
 export class TestsCreateComponent implements OnInit {
-
   examForm: FormGroup;
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
+
+  // data = {
+  //   examType: '',
+  //   name: '',
+  //   sections: [
+  //     {
+  //       sectionType: '',
+  //       questions: [
+  //         {
+  //           answer: ''
+  //         }
+  //       ]
+  //     }
+  //   ]
+  // };
 
   ngOnInit() {
     this.examForm = this.fb.group({
       examType: '',
       name: '',
-      sections: this.fb.array([
-        this.fb.group({
-          sectionType: '',
-          questions: this.fb.array([
-            this.fb.group({
-              answer: ''
-            })
-          ])
-        })
-      ])
-      // sections: this.fb.array([{
-      //   sectionType: 'Section Type',
-      //   questions: this.fb.array([{
-      //     answer: 'Answer'
-      //   }])
-      // }])
+      sections: this.fb.array([])
     });
-    // this.examForm.valueChanges.subscribe(console.log);
   }
 
-  get examSections() {
-    return this.examForm.get('sections') as FormArray;
+  addNewSection() {
+    const control = <FormArray>this.examForm.controls.sections;
+    control.push(
+      this.fb.group({
+        sectionType: '',
+        questions: this.fb.array([])
+      })
+    );
   }
 
+  deleteSection(index) {
+    const control = <FormArray>this.examForm.controls.sections;
+    control.removeAt(index);
+  }
 
+  addNewQuestion(control) {
+    control.push(
+      this.fb.group({
+        answer: ''
+      })
+    );
+  }
 
+  deleteQuestion(control, index) {
+    control.removeAt(index);
+  }
 }
-
-// const examSchema = mongoose.Schema({
-//   examType: String,
-//   name: String,
-//   sections: [
-//     {
-//       sectionType: String,
-//       questions: [
-//         {
-//           answer: String
-//         }
-//       ]
-//     }
-//   ]
-// })

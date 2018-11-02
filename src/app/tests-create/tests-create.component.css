@@ -1,0 +1,28 @@
+.exam-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.exam-form-sections {
+    display: flex;
+    flex-direction: column;
+}
+
+.exam-form-questions {
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    align-content: center;
+    margin-bottom: 5px;
+}
+
+.mat-button .mat-raised-button {
+    min-width: 1%;
+}
+
+.exam-form-lower-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
