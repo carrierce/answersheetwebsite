@@ -14,6 +14,8 @@ import { TestsCreateComponent } from './tests-create/tests-create.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule, MatButtonModule, MatInputModule } from '@angular/material';
+import { TestsDetailComponent } from './tests-detail/tests-detail.component';
+import { IncorrectRouteComponent } from './incorrect-route/incorrect-route.component';
 
 // Below we specify the frontend routes,
 // this is an array of all front-end routes.
@@ -21,6 +23,10 @@ const appRoutes: Routes = [
   {
     path: 'tests',
     component: TestsComponent
+  },
+  {
+    path: 'test-detail/:id',
+    component: TestsDetailComponent
   },
   {
     path: 'tests-create',
@@ -44,6 +50,10 @@ const appRoutes: Routes = [
     path: '',
     redirectTo: '/tests',
     pathMatch: 'full'
+  },
+  {
+    path: '**',
+    component: IncorrectRouteComponent
   }
 ];
 
@@ -54,7 +64,9 @@ const appRoutes: Routes = [
     UsersComponent,
     UserDetailComponent,
     UserCreateComponent,
-    TestsCreateComponent
+    TestsCreateComponent,
+    TestsDetailComponent,
+    IncorrectRouteComponent
   ],
   imports: [
     BrowserModule,

@@ -21,5 +21,15 @@ export class ApiService {
   postTest(exam): Observable<any> {
     return this.http.post(apiUrl, exam, httpOptions);
   }
+
+  getDetailTest(examId): Observable<any> {
+    const apiUrlWithId = apiUrl + '/' + examId;
+    return this.http.get(apiUrlWithId, httpOptions);
+  }
+
+  deleteTest(examId): Observable<any> {
+    const apiUrlWithId = apiUrl + '/' + examId;
+    return this.http.delete(apiUrlWithId, httpOptions);
+  }
 }
 

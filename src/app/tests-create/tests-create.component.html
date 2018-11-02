@@ -6,11 +6,14 @@
       <mat-form-field>
         <input matInput placeholder="Exam Type" formControlName="examType">
         <mat-error *ngIf="examType.invalid && examType.touched">
-          Exam type should not be empty
+          Exam type can not be empty
         </mat-error>
       </mat-form-field>
       <mat-form-field>
         <input matInput placeholder="Test Name" formControlName="name">
+        <mat-error *ngIf="name.invalid && name.touched">
+          Name can not be empty or invalid
+        </mat-error>
       </mat-form-field>
       
       <div formArrayName="sections" class="exam-form-sections">

@@ -1,10 +1,7 @@
-<div *ngFor="let test of tests">
-  {{ test.name }}
-  {{ test.testType }}
-  <div *ngFor="let section of test.sections">
-    {{ section.sectionType}}
-    <div *ngFor="let question of section.questions; let i = index">
-      <span>Question:</span>{{ i+1 }}:{{ question.answer }}
-    </div>
-  </div>
+<div class="container exam-data-display" *ngFor="let test of tests">
+  <h1>{{ test.name }}</h1>
+  <button mat-raised-button color="primary" type="buttons"><a [routerLink]="['/test-detail', test._id]">
+    Details
+  </a></button>
+  <button type="button" (click)="deleteExam(test._id)" mat-raised-button color="warn">Delete Exam</button>
 </div>

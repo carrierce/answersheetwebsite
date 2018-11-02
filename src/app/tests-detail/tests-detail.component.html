@@ -1,0 +1,8 @@
+<h1>{{ test.name }}</h1>
+<h2>{{ test.testType }}</h2>
+<div class="exam-section-display" *ngFor="let section of test.sections">
+  <h3>{{ section.sectionType}}</h3>
+  <div class="questions-display" *ngFor="let question of section.questions; let i = index">
+    <p><span>Question:</span>{{ i+1 }}:{{ question.answer }}</p>
+  </div>
+</div>
