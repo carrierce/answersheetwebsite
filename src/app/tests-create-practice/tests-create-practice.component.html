@@ -1,6 +1,6 @@
 <div class="container">
   <!-- [formGroup] = "examsForm links this form to the component variable examsForm " -->
-  <form [formGroup]="examsForm">
+  <form [formGroup]="examsForm" (ngSubmit)="submitHandler()"> 
       Value: {{ examsForm.value | json }}
       <br>
       <br>
@@ -45,6 +45,7 @@
             <button (click)="deleteSection(i)">Delete Section</button>  
         </div>
       </div>
-
+      <button mat-raised-button color="primary" type="submit"
+      >Submit</button>
   </form>
 </div>

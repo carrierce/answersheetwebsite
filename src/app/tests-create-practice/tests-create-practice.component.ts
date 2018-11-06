@@ -65,4 +65,27 @@ export class TestsCreatePracticeComponent implements OnInit {
     control.removeAt(index);
   }
 
+
+  // submitHandler() {
+  //   const rawValue = this.examForm.value;
+  //   const jsonValue = JSON.stringify(rawValue);
+  //   this.api.postTest(jsonValue).subscribe((result) => {
+  //     this.success = true;
+  //     console.log(result);
+  //   }, (error) => {
+  //     console.error(error);
+  //   });
+  // }
+
+  submitHandler() {
+    console.log('hello');
+    const rawValue = this.examsForm.value;
+    const jsonValue = JSON.stringify(rawValue);
+    this.api.postTest(jsonValue).subscribe((result) => {
+      console.log(result);
+    }, error => {
+      console.error(error);
+    });
+  }
+
 }
