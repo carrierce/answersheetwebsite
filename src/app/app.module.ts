@@ -16,6 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule, MatButtonModule, MatInputModule } from '@angular/material';
 import { TestsDetailComponent } from './tests-detail/tests-detail.component';
 import { IncorrectRouteComponent } from './incorrect-route/incorrect-route.component';
+import { TestsCreatePracticeComponent } from './tests-create-practice/tests-create-practice.component';
 
 // Below we specify the frontend routes,
 // this is an array of all front-end routes.
@@ -44,6 +45,10 @@ const appRoutes: Routes = [
     path: 'user-create',
     component: UserCreateComponent
   },
+  {
+    path: 'test-create-practice',
+    component: TestsCreatePracticeComponent
+  },
   // below we define the default route if no route is given
   // pathMatch
   {
@@ -66,7 +71,8 @@ const appRoutes: Routes = [
     UserCreateComponent,
     TestsCreateComponent,
     TestsDetailComponent,
-    IncorrectRouteComponent
+    IncorrectRouteComponent,
+    TestsCreatePracticeComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,50 @@
+<div class="container">
+  <!-- [formGroup] = "examsForm links this form to the component variable examsForm " -->
+  <form [formGroup]="examsForm">
+      Value: {{ examsForm.value | json }}
+      <br>
+      <br>
+      <input placeholder="Enter Test Type" formControlName="testType">
+      <br>
+      <input placeholder="Enter Test Name" formControlName="testName">
+
+      <button (click)="addTestSection()">Add Section</button>
+      <!-- formArrayName="section" tells angular that this div is linked with the formArray
+      section within my formgroup examsForm
+
+    -->
+      <div formArrayName="sections">
+        <!-- note that we need use.get to access sections & we assign the index as the form group -->
+        <!-- within this array we need to hold a reference to a given section so we can reference that specific section
+        when adding something to it. -->
+        <div *ngFor= "let section of examsForm.get('sections').controls; let i = index" [formGroupName]="i">
+            <input placeholder="Enter Section Type" formControlName="sectionType">
+          <h1>{{ i }}</h1>
+            <!-- let i = index" [formGroupName]="i" lets the form know what form group this belongs to
+            each form group has a unique name  -->
+
+
+
+            <!-- section is 1 singular instance of examsForm.get('sections').controls; -->
+            <!-- that object will contain an array of questions -->
+            <!-- so section.controls.questions passes in a reference to this array of questions -->
+            <!-- because the questions are within an fbgroup we need to access them through .controls -->
+            <!-- the inner array needs to have a reference to an outer array -->
+
+
+            <!-- within this array we need to hold a reference to a given section so we can reference that specific section
+        when adding something to it. -->
+            <!-- section.controls.questions) THIS is the reference that we use to select a specific section -->
+            <button (click)="addNewQuestion(section.controls.questions)">Add Question</button>
+            <div formArrayName="questions">
+              <div *ngFor = "let question of section.get('questions').controls; let j = index " [formGroupName]="j">
+                <input placeholder="Enter Answer Choice" formControlName="answer">
+                <button (click)= "deleteQuestion(section.controls.questions, j)">Delete Question</button>
+              </div>
+            </div>
+            <button (click)="deleteSection(i)">Delete Section</button>  
+        </div>
+      </div>
+
+  </form>
+</div>

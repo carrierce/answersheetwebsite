@@ -49,7 +49,7 @@ export class TestsCreateComponent implements OnInit {
   // here control is converting this.examForm.controls.section into type FormArray
   // even though we define sections above, we need to explicitly tell angualar it is of type
   // form array.
-  // form controls. this.examForm.controls.section- controls contains all the key value form that are 
+  // form controls. this.examForm.controls.section- controls contains all the key value form that are
   // part of exam form. Note that we are not starting FormControls because we are using
   // form builder. Everything inside formbuilder is actually form control
   // the sections is part of a formbuilder group therefore we need to use .controls to access it.
@@ -64,7 +64,7 @@ export class TestsCreateComponent implements OnInit {
     const control = <FormArray> this.examForm.controls.sections;
     control.push(
       this.fb.group({
-        // note that here question could be a string but we make it an array so we 
+        // note that here question could be a string but we make it an array so we
         // can pass in validations as another value
         sectionType: ['', Validators.required],
         questions: this.fb.array([])
