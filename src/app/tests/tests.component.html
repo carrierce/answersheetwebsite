@@ -1,7 +1,19 @@
-<div class="container exam-data-display" *ngFor="let test of tests">
-  <h1>{{ test.name }}</h1>
-  <button mat-raised-button color="primary" type="buttons"><a [routerLink]="['/test-detail', test._id]">
-    Details
-  </a></button>
-  <button type="button" (click)="deleteExam(test._id)" mat-raised-button color="warn">Delete Exam</button>
+<div class="container">
+  <div class="exam-data-display" *ngFor="let test of tests">
+    <h1 class="mat-h1">{{ test.name }}</h1>
+    <a [routerLink]="['/test-detail', test._id]">
+      <button mat-raised-button color="primary" type="button">
+        Details
+      </button>
+    </a>
+    <button type="button" (click)="deleteExam(test._id)" mat-raised-button color="warn">
+      Delete Exam
+    </button>
+    <hr>
+  </div>
+  <a [routerLink]="['/tests-create']">
+    <button mat-raised-button color="primary" type="button">
+      Create Test
+    </button>
+  </a>
 </div>

@@ -12,6 +12,10 @@ export class TestsComponent implements OnInit {
   constructor( private api: ApiService ) { }
 
   ngOnInit() {
+    this.fetchData();
+  }
+
+  fetchData() {
     this.api.getTests().subscribe(res => {
       this.tests = res;
     });
@@ -19,7 +23,10 @@ export class TestsComponent implements OnInit {
 
   deleteExam(examId) {
     this.api.deleteTest(examId)
-    .subscribe((result) => console.log('Sucessfully deleted'), (error) => console.log(error));
+    .subscribe((result) => {
+      this.fetchData();
+      console.log(result);
+    }, (error) => console.log(error));
   }
 
 }

@@ -6,6 +6,7 @@ const examSchema = mongoose.Schema({
   sections: [
     {
       sectionType: String,
+      numberOfQuestions: String,
       questions: [
         {
           answer: String

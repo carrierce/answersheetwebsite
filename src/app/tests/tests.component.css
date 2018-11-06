@@ -1,3 +1,7 @@
 a {
     text-decoration: none;
 }
+
+.mat-raised-button {
+    margin-right: 5px;
+}

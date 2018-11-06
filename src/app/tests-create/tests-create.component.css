@@ -11,10 +11,14 @@
 
 .exam-form-questions {
     display: flex;
-    justify-content: space-around;
-    align-content: center;
-    align-content: center;
+    flex-direction: row;
+    justify-content: space-between;
     margin-bottom: 5px;
+    width: 100%;
+}
+
+.exam-form-individual-questions .mat-form-field {
+    width: 24%;
 }
 
 .mat-button .mat-raised-button {
