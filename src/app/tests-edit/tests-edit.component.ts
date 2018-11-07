@@ -1,22 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ApiService } from '../api.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { SuccessDialogComponent } from '../success-dialog/success-dialog.component';
+
 @Component({
-  selector: 'app-tests-create',
-  templateUrl: './tests-create.component.html',
-  styleUrls: ['./tests-create.component.css']
+  selector: 'app-tests-edit',
+  templateUrl: './tests-edit.component.html',
+  styleUrls: ['./tests-edit.component.css']
 })
-export class TestsCreateComponent implements OnInit {
+export class TestsEditComponent implements OnInit {
+
   examForm: FormGroup;
   success = false;
   loading = false;
+  id = '';
   constructor(private fb: FormBuilder,
               private api: ApiService,
+              private route: ActivatedRoute,
               private router: Router,
-              private dialog: MatDialog) {}
+              private dialog: MatDialog) { }
 
   // data = {
   //   examType: '',
@@ -24,6 +28,7 @@ export class TestsCreateComponent implements OnInit {
   //   sections: [
   //     {
   //       sectionType: '',
+  //       numberOfQuestions: '',
   //       questions: [
   //         {
   //           answer: ''
@@ -34,10 +39,17 @@ export class TestsCreateComponent implements OnInit {
   // };
 
   ngOnInit() {
+    this.id = this.route.snapshot.paramMap.get('id');
+
     this.examForm = this.fb.group({
       examType: ['', Validators.required],
       name: ['', Validators.required],
       sections: this.fb.array([], Validators.required)
+    });
+
+    this.api.getDetailTest(this.id).subscribe(result => {
+      const data = result;
+      this.setExamFormData(data);
     });
   }
 
@@ -78,26 +90,47 @@ export class TestsCreateComponent implements OnInit {
 
   deleteAllQuestions(control) {
     let index = <number>control.numberOfQuestions.value;
-    console.log(index);
-    console.log(control);
     while (index >= 0) {
       control.questions.removeAt(index);
       index--;
     }
   }
 
+  setExamFormData(data) {
+    this.examForm.controls['examType'].setValue(data.examType);
+    this.examForm.controls['name'].setValue(data.name);
+    const control = <FormArray>this.examForm.controls.sections;
+    data.sections.forEach((section) => {
+      control.push(this.fb.group({
+        sectionType: section.sectionType,
+        numberOfQuestions: section.numberOfQuestions,
+        questions: this.setQuestions(section)
+      }));
+    });
+  }
+
+  setQuestions(section): FormArray {
+    const questionsArray = new FormArray([]);
+    section.questions.forEach(question => {
+      questionsArray.push(this.fb.group({
+        answer: question.answer
+      }));
+    });
+    return questionsArray;
+  }
+
   submitHandler() {
     this.loading = true;
     const rawValue = this.examForm.value;
     const jsonValue = JSON.stringify(rawValue);
-    this.api.postTest(jsonValue).subscribe((result) => {
+    this.api.editTest(this.id, jsonValue).subscribe(result => {
       this.loading = false;
       this.success = true;
       this.dialog.open(SuccessDialogComponent);
       this.router.navigate(['/tests']);
-      console.log(result);
-    }, (error) => {
+    }, error => {
       this.loading = false;
+      console.error(error);
     });
   }
 }

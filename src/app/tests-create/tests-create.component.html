@@ -4,19 +4,20 @@
     <h3 class="mat-h3">Enter Test Details</h3>
     <hr>
     <div class="exam-form">
-      <mat-form-field>
-        <input matInput placeholder="Exam Type" formControlName="examType">
-        <mat-error *ngIf="examType.invalid && examType.touched">
-          Exam type can not be empty
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Test Name" formControlName="name">
-        <mat-error *ngIf="name.invalid && name.touched">
-          Name can not be empty or invalid
-        </mat-error>
-      </mat-form-field>
-      
+      <div class="small-div">
+        <mat-form-field>
+          <input matInput placeholder="Exam Type" formControlName="examType">
+          <mat-error *ngIf="examType.invalid && examType.touched">
+            Exam type can not be empty
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Test Name" formControlName="name">
+          <mat-error *ngIf="name.invalid && name.touched">
+            Name can not be empty or invalid
+          </mat-error>
+        </mat-form-field>
+      </div>
       <div formArrayName="sections" class="exam-form-sections">
         <div *ngFor="let section of examForm.get('sections').controls; let i = index" [formGroupName]="i">
           <mat-form-field>
@@ -41,13 +42,12 @@
           </div>
         </div>  
       </div>
-      <button type="button" mat-raised-button color="primary" (click)="addNewSection()">New section</button>
+      <div class="small-div">
+        <button type="button" mat-raised-button color="primary" (click)="addNewSection()">New section</button>
+      </div>
     </div>
     <button mat-raised-button color="primary" type="submit"
       [disabled]="examForm.invalid">Submit</button>
   </form>
-  <div *ngIf="success" class="form-submitted-message">
-    <h3>Your form has been successfully submitted. Please refresh the page if you want to submit another form.</h3>
-  </div>
 </div>
 

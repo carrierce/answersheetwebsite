@@ -1,0 +1,52 @@
+<div class="container mat-typography">
+  <form [formGroup]="examForm" [hidden]="success" (ngSubmit)="submitHandler()">
+    Value: {{ examForm.value | json }}
+    <h3 class="mat-h3">Enter Test Details</h3>
+    <hr>
+    <div class="exam-form">
+      <mat-form-field>
+        <input matInput placeholder="Exam Type" formControlName="examType">
+        <mat-error *ngIf="examType.invalid && examType.touched">
+          Exam type can not be empty
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Test Name" formControlName="name">
+        <mat-error *ngIf="name.invalid && name.touched">
+          Name can not be empty or invalid
+        </mat-error>
+      </mat-form-field>
+
+      <div formArrayName="sections" class="exam-form-sections">
+        <div *ngFor="let section of examForm.get('sections').controls; let i = index" [formGroupName]="i">
+          <mat-form-field>
+            <input matInput placeholder="Section Type" formControlName="sectionType">
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <input matInput placeholder="Number of Questions" formControlName="numberOfQuestions" type="text">
+          </mat-form-field>
+          <div class="exam-form-questions" formArrayName="questions">
+            <div class="exam-form-individual-questions" *ngFor="let question of section.get('questions').controls; let j = index"
+              [formGroupName]="j">
+              <mat-form-field>
+                <mat-label>{{ j + 1 }}</mat-label>
+                <input matInput placeholder="Enter Answer Choice" formControlName="answer">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="exam-form-lower-buttons">
+            <button type="button" mat-raised-button color="primary" (click)="addNewQuestion(section.controls)">Add
+              question</button>
+            <button type="button" mat-raised-button color="primary" (click)="deleteAllQuestions(section.controls)">Delete
+              All Questions</button>
+            <button type="button" mat-raised-button color="warn" (click)="deleteSection(i)">Delete Section</button>
+          </div>
+        </div>
+      </div>
+      <button type="button" mat-raised-button color="primary" (click)="addNewSection()">New section</button>
+    </div>
+    <button mat-raised-button color="primary" type="submit" [disabled]="examForm.invalid">Submit</button>
+  </form>
+</div>
+
