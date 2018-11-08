@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../api.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
@@ -24,10 +24,11 @@ export class TestsCreateComponent implements OnInit {
   //   sections: [
   //     {
   //       sectionType: '',
+  //       numberOfQuestions: '',
   //       questions: [
   //         {
   //           answer: ''
-  //         }
+  //         },
   //       ]
   //     }
   //   ]
@@ -66,6 +67,7 @@ export class TestsCreateComponent implements OnInit {
   }
 
   addNewQuestion(control) {
+    // control is section.controls
     const intNumberOfQuestions = control.numberOfQuestions.value as number;
     for (let i = 0; i < intNumberOfQuestions; i++) {
       control.questions.push(
@@ -77,6 +79,7 @@ export class TestsCreateComponent implements OnInit {
   }
 
   deleteAllQuestions(control) {
+    // control is section.controls
     let index = <number>control.numberOfQuestions.value;
     console.log(index);
     console.log(control);
