@@ -16,6 +16,7 @@
     justify-content: space-between;
     margin-bottom: 5px;
     width: 80%;
+    max-width: 80%;
 }
 
 .exam-form-individual-questions .mat-form-field {

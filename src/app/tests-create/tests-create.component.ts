@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../api.service';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material';
+import { SuccessDialogComponent } from '../success-dialog/success-dialog.component';
 @Component({
   selector: 'app-tests-create',
   templateUrl: './tests-create.component.html',
@@ -9,8 +12,11 @@ import { ApiService } from '../api.service';
 export class TestsCreateComponent implements OnInit {
   examForm: FormGroup;
   success = false;
-
-  constructor(private fb: FormBuilder, private api: ApiService) {}
+  loading = false;
+  constructor(private fb: FormBuilder,
+              private api: ApiService,
+              private router: Router,
+              private dialog: MatDialog) {}
 
   // data = {
   //   examType: '',
@@ -31,7 +37,7 @@ export class TestsCreateComponent implements OnInit {
     this.examForm = this.fb.group({
       examType: ['', Validators.required],
       name: ['', Validators.required],
-      sections: this.fb.array([])
+      sections: this.fb.array([], Validators.required)
     });
   }
 
@@ -67,7 +73,8 @@ export class TestsCreateComponent implements OnInit {
         // note that here question could be a string but we make it an array so we
         // can pass in validations as another value
         sectionType: ['', Validators.required],
-        questions: this.fb.array([])
+        numberOfQuestions: ['', Validators.required],
+        questions: this.fb.array([], Validators.required)
       })
     );
   }
@@ -81,17 +88,24 @@ export class TestsCreateComponent implements OnInit {
   // when we use addNewQuestion in the html we pass in which section this question belongs to
   // so it knows what array to push these questions into.
   addNewQuestion(control) {
-    control.push(
-      this.fb.group({
-        // note that here answer could be a string but we make it an array so we can pass in validations as another value
-        answer: ['', Validators.required]
-      })
-    );
+    const intNumberOfQuestions = control.numberOfQuestions.value as number;
+    for (let i = 0; i < intNumberOfQuestions; i++) {
+      control.questions.push(
+        this.fb.group({
+          answer: ['', Validators.required]
+        })
+      );
+    }
   }
 
-  // control defines which section we are looking at
-  deleteQuestion(control, index) {
-    control.removeAt(index);
+  deleteAllQuestions(control) {
+    let index = <number>control.numberOfQuestions.value;
+    console.log(index);
+    console.log(control);
+    while (index >= 0) {
+      control.questions.removeAt(index);
+      index--;
+    }
   }
 
   // this.examForm.value, with value being the content of the exam form, this is of type js Object.
@@ -105,14 +119,17 @@ export class TestsCreateComponent implements OnInit {
     // apiUrl is defined in the service & it is the endpoint url we want to post the data to.
     // httpOptions just defines the json.
   submitHandler() {
-    console.log('goodbye');
+    this.loading = true;
     const rawValue = this.examForm.value;
     const jsonValue = JSON.stringify(rawValue);
     this.api.postTest(jsonValue).subscribe((result) => {
+      this.loading = false;
       this.success = true;
+      this.dialog.open(SuccessDialogComponent);
+      this.router.navigate(['/tests']);
       console.log(result);
     }, (error) => {
-      console.error(error);
+      this.loading = false;
     });
   }
 }

@@ -13,10 +13,12 @@ import { FormsModule } from '@angular/forms';
 import { TestsCreateComponent } from './tests-create/tests-create.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatFormFieldModule, MatButtonModule, MatInputModule } from '@angular/material';
+import { MatFormFieldModule, MatButtonModule, MatInputModule, MatDialogModule } from '@angular/material';
 import { TestsDetailComponent } from './tests-detail/tests-detail.component';
 import { IncorrectRouteComponent } from './incorrect-route/incorrect-route.component';
-import { TestsCreatePracticeComponent } from './tests-create-practice/tests-create-practice.component';
+import { TestsEditComponent } from './tests-edit/tests-edit.component';
+import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
+
 
 // Below we specify the frontend routes,
 // this is an array of all front-end routes.
@@ -34,6 +36,10 @@ const appRoutes: Routes = [
     component: TestsCreateComponent
   },
   {
+    path: 'test-edit/:id',
+    component: TestsEditComponent
+  },
+  {
     path: 'users',
     component: UsersComponent
   },
@@ -44,10 +50,6 @@ const appRoutes: Routes = [
   {
     path: 'user-create',
     component: UserCreateComponent
-  },
-  {
-    path: 'test-create-practice',
-    component: TestsCreatePracticeComponent
   },
   // below we define the default route if no route is given
   // pathMatch
@@ -72,7 +74,8 @@ const appRoutes: Routes = [
     TestsCreateComponent,
     TestsDetailComponent,
     IncorrectRouteComponent,
-    TestsCreatePracticeComponent
+    TestsEditComponent,
+    SuccessDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -84,8 +87,10 @@ const appRoutes: Routes = [
     MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
+    MatDialogModule
   ],
   providers: [ ApiService, UserapiService ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [SuccessDialogComponent]
 })
 export class AppModule { }
