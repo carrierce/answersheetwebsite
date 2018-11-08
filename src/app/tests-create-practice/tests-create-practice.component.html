@@ -1,12 +1,12 @@
 <div class="container">
   <!-- [formGroup] = "examsForm links this form to the component variable examsForm " -->
-  <form [formGroup]="examsForm" (ngSubmit)="submitHandler()"> 
-      Value: {{ examsForm.value | json }}
+  <form [formGroup]="examForm" (ngSubmit)="submitHandler()"> 
+      Value: {{ examForm.value | json }}
       <br>
       <br>
-      <input placeholder="Enter Test Type" formControlName="testType">
+      <input placeholder="Enter Test Type" formControlName="examType">
       <br>
-      <input placeholder="Enter Test Name" formControlName="testName">
+      <input placeholder="Enter Test Name" formControlName="name">
 
       <button (click)="addTestSection()">Add Section</button>
       <!-- formArrayName="section" tells angular that this div is linked with the formArray
@@ -17,7 +17,7 @@
         <!-- note that we need use.get to access sections & we assign the index as the form group -->
         <!-- within this array we need to hold a reference to a given section so we can reference that specific section
         when adding something to it. -->
-        <div *ngFor= "let section of examsForm.get('sections').controls; let i = index" [formGroupName]="i">
+        <div *ngFor= "let section of examForm.get('sections').controls; let i = index" [formGroupName]="i">
             <input placeholder="Enter Section Type" formControlName="sectionType">
           <h1>{{ i }}</h1>
             <!-- let i = index" [formGroupName]="i" lets the form know what form group this belongs to
@@ -46,6 +46,6 @@
         </div>
       </div>
       <button mat-raised-button color="primary" type="submit"
-      >Submit</button>
+      [disabled]="examForm.invalid">Submit</button>
   </form>
 </div>

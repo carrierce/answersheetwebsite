@@ -1,3 +1,7 @@
+<div class="pageTile">
+  <h1>Available Tests</h1>
+</div>
+
 <div class="container exam-data-display" *ngFor="let test of tests">
   <h1>{{ test.name }}</h1>
   <button mat-raised-button color="primary" type="buttons"><a [routerLink]="['/test-detail', test._id]">

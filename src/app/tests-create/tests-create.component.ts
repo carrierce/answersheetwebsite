@@ -105,6 +105,7 @@ export class TestsCreateComponent implements OnInit {
     // apiUrl is defined in the service & it is the endpoint url we want to post the data to.
     // httpOptions just defines the json.
   submitHandler() {
+    console.log('goodbye');
     const rawValue = this.examForm.value;
     const jsonValue = JSON.stringify(rawValue);
     this.api.postTest(jsonValue).subscribe((result) => {

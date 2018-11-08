@@ -8,7 +8,7 @@ import { ApiService } from '../api.service';
   styleUrls: ['./tests-create-practice.component.css']
 })
 export class TestsCreatePracticeComponent implements OnInit {
-  examsForm: FormGroup;
+  examForm: FormGroup;
   success = false;
 
   // constructor is where we inject services
@@ -16,9 +16,9 @@ export class TestsCreatePracticeComponent implements OnInit {
 
   // here we create the form template
   ngOnInit() {
-    this.examsForm = this.fb.group({
-      testType: [''],
-      testName: [''],
+    this.examForm = this.fb.group({
+      examType: [''],
+      name: [''],
       sections: this.fb.array([])
     });
   }
@@ -41,7 +41,7 @@ export class TestsCreatePracticeComponent implements OnInit {
 
   addTestSection() {
     // IDing the part of the examform we want to push to
-    const control = this.examsForm.controls.sections as FormArray;
+    const control = this.examForm.controls.sections as FormArray;
     // note that we only push things, 1 layer deep. So when want to push in another layer
     // we need to create a new function to do so
     control.push(this.fb.group({
@@ -57,7 +57,7 @@ export class TestsCreatePracticeComponent implements OnInit {
   }
 
   deleteSection(index) {
-    const control = <FormArray> this.examsForm.controls.sections;
+    const control = <FormArray> this.examForm.controls.sections;
     control.removeAt(index);
   }
 
@@ -65,21 +65,9 @@ export class TestsCreatePracticeComponent implements OnInit {
     control.removeAt(index);
   }
 
-
-  // submitHandler() {
-  //   const rawValue = this.examForm.value;
-  //   const jsonValue = JSON.stringify(rawValue);
-  //   this.api.postTest(jsonValue).subscribe((result) => {
-  //     this.success = true;
-  //     console.log(result);
-  //   }, (error) => {
-  //     console.error(error);
-  //   });
-  // }
-
   submitHandler() {
     console.log('hello');
-    const rawValue = this.examsForm.value;
+    const rawValue = this.examForm.value;
     const jsonValue = JSON.stringify(rawValue);
     this.api.postTest(jsonValue).subscribe((result) => {
       console.log(result);
@@ -87,5 +75,4 @@ export class TestsCreatePracticeComponent implements OnInit {
       console.error(error);
     });
   }
-
 }
