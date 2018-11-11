@@ -26,7 +26,7 @@ export class TestsEditComponent implements OnInit {
   //   examType: '',
   //   name: '',
   //   sections: [
-  //     {
+  //     0 => {
   //       sectionType: '',
   //       numberOfQuestions: '',
   //       questions: [
@@ -99,23 +99,34 @@ export class TestsEditComponent implements OnInit {
   setExamFormData(data) {
     this.examForm.controls['examType'].setValue(data.examType);
     this.examForm.controls['name'].setValue(data.name);
+    // We get a reference to the empty form array data sections on line 47 in ngOnInit().
     const control = <FormArray>this.examForm.controls.sections;
     data.sections.forEach((section) => {
+      // This is not an array push, this is a formarray push.
+      // Inside formarray we can only push formgroup or formcontrol.
       control.push(this.fb.group({
-        sectionType: section.sectionType,
+        sectionType: section.sectionType, // sectionType  = data.sections[0].sectionType
         numberOfQuestions: section.numberOfQuestions,
-        questions: this.setQuestions(section)
+        questions: this.setQuestions(section) // section = data.sections[0]
+        // if questions.length = 0 this.setQuestions will return null
+        // questions: (this.fb.array[]).push(this.fb.push({ data.section[0].question.answer}))
       }));
     });
   }
 
   setQuestions(section): FormArray {
     const questionsArray = new FormArray([]);
+    // data.section[0].questions.foreach(question[0])
     section.questions.forEach(question => {
       questionsArray.push(this.fb.group({
-        answer: question.answer
+        answer: question.answer // data.section[0].questions[0].question[0]
       }));
     });
+    /*
+    QuestionsArray = FormArray([this.fb.group({
+      "answer": "a"
+    })])
+    */
     return questionsArray;
   }
 
