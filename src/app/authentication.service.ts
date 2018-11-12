@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'x-auth-token' }, )
@@ -15,14 +16,14 @@ export class AuthenticationService {
   loginApi = '/api/auth';
   private token: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   private saveToken(token: string): void {
     localStorage.setItem('auth-token', token);
     this.token = token;
   }
 
-  private getToken(): string {
+  public getToken(): string {
     if (!this.token) {
       this.token = localStorage.getItem('auth-token');
     }
@@ -48,6 +49,12 @@ export class AuthenticationService {
     } else {
       return false;
     }
+  }
+
+  public logOut(): void {
+    this.token = '';
+    window.localStorage.removeItem('auth-token');
+    this.router.navigate(['/tests']);
   }
 
   registerUser(user): Observable<any> {

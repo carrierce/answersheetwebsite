@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -15,7 +16,7 @@ export class RegisterComponent implements OnInit {
     isAdmin: false
   };
 
-  constructor(private auth: AuthenticationService) { }
+  constructor(private auth: AuthenticationService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -24,6 +25,7 @@ export class RegisterComponent implements OnInit {
     const userJSON = JSON.stringify(this.user);
     this.auth.registerUser(userJSON).subscribe(result => {
       console.log(this.auth.isLoggedIn());
+      this.router.navigate(['/tests']);
     }, err => {
       console.log(err);
     });
