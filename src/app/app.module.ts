@@ -18,6 +18,7 @@ import { TestsDetailComponent } from './tests-detail/tests-detail.component';
 import { IncorrectRouteComponent } from './incorrect-route/incorrect-route.component';
 import { TestsEditComponent } from './tests-edit/tests-edit.component';
 import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
+import { RegisterComponent } from './register/register.component';
 
 // Below we specify the frontend routes,
 // this is an array of all front-end routes.
@@ -37,6 +38,10 @@ const appRoutes: Routes = [
   {
     path: 'test-edit/:id',
     component: TestsEditComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
   },
   {
     path: 'users',
@@ -74,7 +79,8 @@ const appRoutes: Routes = [
     TestsDetailComponent,
     IncorrectRouteComponent,
     TestsEditComponent,
-    SuccessDialogComponent
+    SuccessDialogComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

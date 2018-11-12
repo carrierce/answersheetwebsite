@@ -26,7 +26,9 @@ const userSchema = mongoose.Schema({
 });
 
 userSchema.methods.generateAuthToken = function () {
-  const token = jwt.sign({ _id: this._id, isAdmin: this.isAdmin }, process.env.SECRET);
+  let expiry = new Date();
+  expiry.setDate(expiry.getDate() + 7);
+  const token = jwt.sign({ _id: this._id, isAdmin: this.isAdmin, exp: expiry}, process.env.SECRET);
   return token;
 }
 
