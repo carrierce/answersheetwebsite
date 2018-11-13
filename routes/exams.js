@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const Exam = require('../models/Exam');
+const auth = require('../middlewares/auth');
+const admin = require('../middlewares/admin');
 
 
 router.get('/', (req, res, next) => {
@@ -22,7 +24,7 @@ router.get('/:id', (req, res, next) => {
   });
 });
 
-router.post('/', (req, res, next) => {
+router.post('/', auth, (req, res, next) => {
   Exam.create(req.body, (err, post)=>{
     if (err) {
       return next(err); 
@@ -32,7 +34,7 @@ router.post('/', (req, res, next) => {
   });
 });
   
-router.put('/:id', (req, res, next) => {
+router.put('/:id', auth, (req, res, next) => {
   Exam.findByIdAndUpdate(req.params.id, req.body, (err, post) => {
     if (err) {
       return next(err);
@@ -42,7 +44,7 @@ router.put('/:id', (req, res, next) => {
   });
 });
 
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', [auth, admin], (req, res, next) => {
   Exam.findByIdAndRemove(req.params.id, (err, post) => {
     if (err) {
       return next(err);

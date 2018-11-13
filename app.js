@@ -4,6 +4,7 @@ const logger = require('morgan');
 const mongoose = require('mongoose');
 const examsAPI = require('./routes/exams');
 const usersAPI = require('./routes/users');
+const auth = require('./routes/auth');
 
 const app = express();
 
@@ -13,14 +14,7 @@ const app = express();
 
 app.use(logger('dev')); // Here we only log in development mode.
 app.use(express.json()); // We use this to parse through request bodies
-app.use(express.static(path.join(__dirname, 'dist/AnswerSheetWebsite'))); 
-  // this automatically finds the path in the file system, 
-  // so it can know the path & puts everything within dist
-  // For all static content, things that do not change static HTML, 
-  // all content goes within here.
-  // the /XXXX is the folder within dist in my project
-  // this concatents __dirname with what comes after:  'dist/AnswerSheetWebsite'
-  // dirname is the name of the whole folder system
+app.use(express.static(path.join(__dirname, 'dist/AnswerSheetWebsite')));
 
 app.use('/api/exams', examsAPI);
   // our first exception to the '/' path if we get '/api/reading' go to readingAPI
@@ -29,16 +23,22 @@ app.use('/api/exams', examsAPI);
   // this happens because readingAPI points to './routes/reading'
 
 app.use('/api/users', usersAPI);
+app.use('/api/auth', auth);
 
 
 app.use('*', express.static(path.join(__dirname, 'dist/AnswerSheetWebsite')));
   // This sets that an empty URL will go to within dist/AnswerSheetWebsite
   // this means anything / or anything undefined i.e. * goes here. 
 
-mongoose.connect('mongodb+srv://charlescarrier:12345@cluster0-1kiiw.mongodb.net/test?retryWrites=true', {
-  useNewUrlParser: true
-}).then(()=> console.log("connection to mongoDB successful"))
-  .catch(()=> console.log("connection to mongoDB failed"));
+mongoose
+  .connect(
+    "mongodb+srv://vijaykumar:Tp020654@cluster0-mhhcs.mongodb.net/answersheetwebsite?retryWrites=true",
+    {
+      useNewUrlParser: true
+    }
+  )
+  .then(() => console.log("connection to mongoDB successful"))
+  .catch(() => console.log("connection to mongoDB failed"));
   // this is where we just mongoose to connect to the backend.
 
 app.listen('3000', () => {

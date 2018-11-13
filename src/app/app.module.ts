@@ -12,16 +12,24 @@ import { UserCreateComponent } from './user-create/user-create.component';
 import { FormsModule } from '@angular/forms';
 import { TestsCreateComponent } from './tests-create/tests-create.component';
 import { ReactiveFormsModule } from '@angular/forms';
-// we also need to import the BrowserAnimationsModule to do the fancy animation
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// we need to import materials to use the pretty angular forms
-// we need to add into the imports down below as well
-import { MatFormFieldModule, MatButtonModule, MatInputModule, MatDialogModule } from '@angular/material';
+import {
+  MatFormFieldModule,
+  MatButtonModule,
+  MatInputModule,
+  MatDialogModule,
+  MatToolbarModule,
+  MatSidenavModule,
+  MatListModule,
+  MatIconModule
+} from '@angular/material';
 import { TestsDetailComponent } from './tests-detail/tests-detail.component';
 import { IncorrectRouteComponent } from './incorrect-route/incorrect-route.component';
 import { TestsEditComponent } from './tests-edit/tests-edit.component';
 import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
-
+import { RegisterComponent } from './register/register.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { LoginComponent } from './login/login.component';
 
 // Below we specify the frontend routes,
 // this is an array of all front-end routes.
@@ -31,8 +39,7 @@ const appRoutes: Routes = [
     component: TestsComponent
   },
   {
-    // here we send the id that we generate in test-details and send that
-    path: 'test-detail/:id', //test._id = :id
+    path: 'test-detail/:id',
     component: TestsDetailComponent
   },
   {
@@ -42,6 +49,14 @@ const appRoutes: Routes = [
   {
     path: 'test-edit/:id',
     component: TestsEditComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: 'users',
@@ -79,7 +94,9 @@ const appRoutes: Routes = [
     TestsDetailComponent,
     IncorrectRouteComponent,
     TestsEditComponent,
-    SuccessDialogComponent
+    SuccessDialogComponent,
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -91,10 +108,15 @@ const appRoutes: Routes = [
     MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatListModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    FlexLayoutModule
   ],
-  providers: [ ApiService, UserapiService ],
+  providers: [ApiService, UserapiService],
   bootstrap: [AppComponent],
   entryComponents: [SuccessDialogComponent]
 })
-export class AppModule { }
+export class AppModule {}
