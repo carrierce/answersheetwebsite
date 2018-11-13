@@ -22,8 +22,12 @@ export class ApiService {
     return this.http.post(apiUrl, exam, httpOptions);
   }
 
+  // this updates by displaying existing data in the test
   editTest(examId, exam): Observable<any> {
     const apiUrlWithId = apiUrl + '/' + examId;
+    // http.put, put checks the entry with a given id, then takes out the data at that point and updates the data.
+    // put changes everything at a given id
+    // patch only changes the selected data at the point
     return this.http.put(apiUrlWithId, exam, httpOptions);
   }
 

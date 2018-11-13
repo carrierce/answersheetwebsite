@@ -1,4 +1,5 @@
 <div class="test-detail-display">
+  <!-- the test? means only display the data if its not undefined and so it basically solves the loading lag issue -->
   <h1 class="mat-h1">{{ test?.name }}</h1>
   <h2 class="mat-h2">{{ test?.testType }}</h2>
   <div class="exam-section-display" *ngFor="let section of test?.sections">

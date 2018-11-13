@@ -1,6 +1,10 @@
 <div class="container">
+  <!-- in this for loop we are looping through tests, which contains every test from the db and each test contains
+  _id, which is created by mongoDB -->
   <div class="exam-data-display" *ngFor="let test of tests">
     <h1 class="mat-h1">{{ test.name }}</h1>
+    <!-- // here is where we go say go to this route /test-detail and we pass in test._id -->
+    <!-- we need to do this because in the router we are expecting a test._id -->
     <a [routerLink]="['/test-detail', test._id]">
       <button mat-raised-button color="primary" type="button">
         Details

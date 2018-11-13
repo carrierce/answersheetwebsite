@@ -12,7 +12,10 @@ import { UserCreateComponent } from './user-create/user-create.component';
 import { FormsModule } from '@angular/forms';
 import { TestsCreateComponent } from './tests-create/tests-create.component';
 import { ReactiveFormsModule } from '@angular/forms';
+// we also need to import the BrowserAnimationsModule to do the fancy animation
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// we need to import materials to use the pretty angular forms
+// we need to add into the imports down below as well
 import { MatFormFieldModule, MatButtonModule, MatInputModule, MatDialogModule } from '@angular/material';
 import { TestsDetailComponent } from './tests-detail/tests-detail.component';
 import { IncorrectRouteComponent } from './incorrect-route/incorrect-route.component';
@@ -28,7 +31,8 @@ const appRoutes: Routes = [
     component: TestsComponent
   },
   {
-    path: 'test-detail/:id',
+    // here we send the id that we generate in test-details and send that
+    path: 'test-detail/:id', //test._id = :id
     component: TestsDetailComponent
   },
   {

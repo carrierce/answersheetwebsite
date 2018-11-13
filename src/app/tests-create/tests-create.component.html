@@ -7,6 +7,7 @@
       <div class="small-div">
         <mat-form-field>
           <input matInput placeholder="Exam Type" formControlName="examType">
+          <!-- examType.touched means once clicked, & examType.invalid means has an error -->
           <mat-error *ngIf="examType.invalid && examType.touched">
             Exam type can not be empty
           </mat-error>
@@ -30,6 +31,7 @@
           </mat-form-field>
           <br>
           <mat-form-field>
+            <!--  -->
             <input matInput placeholder="Number of Questions" formControlName="numberOfQuestions" type="text">
           </mat-form-field>
           <div class="exam-form-questions" formArrayName="questions">
@@ -41,8 +43,10 @@
             </div>
           </div>
           <div class="exam-form-lower-buttons">
-            <button type="button" mat-raised-button color="primary" (click)="addNewQuestion(section.controls)">Add question</button>  
+            <!-- Add Questions button runs the onclick addNewQuestion button -->
+            <button type="button" mat-raised-button color="primary" (click)="addNewQuestion(section.controls)">Add questions</button>  
             <button type="button" mat-raised-button color="primary" (click)="deleteAllQuestions(section.controls)">Delete All Questions</button>
+            <!-- This deletes the section that we are on. -->
             <button type="button" mat-raised-button color="warn" (click)="deleteSection(i)">Delete Section</button>
           </div>
         </div>  
@@ -51,6 +55,9 @@
         <button type="button" mat-raised-button color="primary" (click)="addNewSection()">New section</button>
       </div>
     </div>
+    <!-- the [disabled]="examForm.invalid"
+    this is part of the validator anything that is invalid inside the FormGroup, invalid becomes true
+  therefore the submit is disabled until all invalids are false. -->
     <button mat-raised-button color="primary" type="submit"
       [disabled]="examForm.invalid">Submit</button>
   </form>

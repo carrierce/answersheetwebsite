@@ -14,3 +14,5 @@ export class SuccessDialogComponent implements OnInit {
   }
 
 }
+
+// this is basically an empty component that just gives a success

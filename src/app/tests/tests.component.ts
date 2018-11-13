@@ -15,13 +15,21 @@ export class TestsComponent implements OnInit {
     this.fetchData();
   }
 
+
+  // fetchData just gets all the tests from the api and assigns them to 
+  // this.tests
+  // this is fetdataData() is there so when we deleteExam we can reload fetching the data so it displays the updated data
   fetchData() {
     this.api.getTests().subscribe(res => {
       this.tests = res;
     });
   }
 
-  deleteExam(examId) {
+
+  // we need to pass in the test id
+  // examId = test._id 
+  // note that in api.deleteTest it removes it from the front & the back
+  deleteExam(examId) { 
     this.api.deleteTest(examId)
     .subscribe((result) => {
       this.fetchData();

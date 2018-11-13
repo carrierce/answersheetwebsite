@@ -6,6 +6,10 @@ const examSchema = mongoose.Schema({
   sections: [
     {
       sectionType: String,
+      // added a field called # of questions.
+      // therefore for every section can enter the # of the questions.
+      // When we submit from the front end the input is mostly a string, 
+      // so keeping everything a string makes it simpler
       numberOfQuestions: String,
       questions: [
         {
