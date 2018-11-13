@@ -1,10 +1,12 @@
 const express = require('express');
 const path = require('path');
 const logger = require('morgan');
+const dotenv = require('dotenv').config();
 const mongoose = require('mongoose');
 const examsAPI = require('./routes/exams');
 const usersAPI = require('./routes/users');
 const auth = require('./routes/auth');
+
 
 const app = express();
 
@@ -32,7 +34,7 @@ app.use('*', express.static(path.join(__dirname, 'dist/AnswerSheetWebsite')));
 
 mongoose
   .connect(
-    "mongodb+srv://vijaykumar:Tp020654@cluster0-mhhcs.mongodb.net/answersheetwebsite?retryWrites=true",
+    "mongodb+srv://charlescarrier:" + process.env.DB_PASS + "@cluster0-1kiiw.mongodb.net/" + process.env.DB_NAME + "?retryWrites=true",
     {
       useNewUrlParser: true
     }
@@ -50,5 +52,3 @@ module.exports = app;
   // Here we are exporting the const app and making it sharable between components
 
   
-  
-
