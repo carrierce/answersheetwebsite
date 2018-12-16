@@ -32,7 +32,7 @@ app.use('*', express.static(path.join(__dirname, 'dist/AnswerSheetWebsite')));
 
 mongoose
   .connect(
-    "mongodb+srv://vijaykumar:Tp020654@cluster0-mhhcs.mongodb.net/answersheetwebsite?retryWrites=true",
+    "mongodb+srv://charlescarrier:12345@cluster0-1kiiw.mongodb.net/answersheetwebsite?retryWrites=true",
     {
       useNewUrlParser: true
     }
