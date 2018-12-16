@@ -1,0 +1,12 @@
+.question-section-display {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.test-detail-display
+{
+    max-width: 80%;
+    width: 80%;
+    margin: 0 auto;
+}

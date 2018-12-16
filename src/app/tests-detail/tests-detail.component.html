@@ -1,0 +1,12 @@
+<div class="test-detail-display">
+  <h1 class="mat-h1">{{ test?.name }}</h1>
+  <h2 class="mat-h2">{{ test?.testType }}</h2>
+  <div class="exam-section-display" *ngFor="let section of test?.sections">
+    <h3 class="mat-h3">{{ section.sectionType}}</h3>
+    <div class="question-section-display">
+      <div class="questions-display" *ngFor="let question of section?.questions; let i = index">
+        <p class="mat-body"><span>Q</span>{{ i+1 }}: {{ question.answer | uppercase }}</p>
+      </div>
+    </div>
+  </div>
+</div>

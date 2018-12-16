@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-tests',
@@ -11,10 +12,21 @@ export class TestsComponent implements OnInit {
   constructor( private api: ApiService ) { }
 
   ngOnInit() {
+    this.fetchData();
+  }
+
+  fetchData() {
     this.api.getTests().subscribe(res => {
       this.tests = res;
-      console.log(res);
     });
+  }
+
+  deleteExam(examId) {
+    this.api.deleteTest(examId)
+    .subscribe((result) => {
+      this.fetchData();
+      console.log(result);
+    }, (error) => console.log(error));
   }
 
 }

@@ -1,0 +1,35 @@
+.exam-form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+}
+
+.exam-form-sections {
+    display: flex;
+    flex-direction: column;
+}
+
+.exam-form-questions {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    width: 80%;
+    max-width: 80%;
+}
+
+.exam-form-individual-questions .mat-form-field {
+    width: 24%;
+}
+
+.mat-button .mat-raised-button {
+    min-width: 1%;
+}
+
+.exam-form-lower-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}

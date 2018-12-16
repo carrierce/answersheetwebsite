@@ -10,6 +10,26 @@ import { UsersComponent } from './users/users.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { UserCreateComponent } from './user-create/user-create.component';
 import { FormsModule } from '@angular/forms';
+import { TestsCreateComponent } from './tests-create/tests-create.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  MatFormFieldModule,
+  MatButtonModule,
+  MatInputModule,
+  MatDialogModule,
+  MatToolbarModule,
+  MatSidenavModule,
+  MatListModule,
+  MatIconModule
+} from '@angular/material';
+import { TestsDetailComponent } from './tests-detail/tests-detail.component';
+import { IncorrectRouteComponent } from './incorrect-route/incorrect-route.component';
+import { TestsEditComponent } from './tests-edit/tests-edit.component';
+import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
+import { RegisterComponent } from './register/register.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { LoginComponent } from './login/login.component';
 
 // Below we specify the frontend routes,
 // this is an array of all front-end routes.
@@ -17,6 +37,26 @@ const appRoutes: Routes = [
   {
     path: 'tests',
     component: TestsComponent
+  },
+  {
+    path: 'test-detail/:id',
+    component: TestsDetailComponent
+  },
+  {
+    path: 'tests-create',
+    component: TestsCreateComponent
+  },
+  {
+    path: 'test-edit/:id',
+    component: TestsEditComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: 'users',
@@ -36,6 +76,10 @@ const appRoutes: Routes = [
     path: '',
     redirectTo: '/tests',
     pathMatch: 'full'
+  },
+  {
+    path: '**',
+    component: IncorrectRouteComponent
   }
 ];
 
@@ -45,15 +89,34 @@ const appRoutes: Routes = [
     TestsComponent,
     UsersComponent,
     UserDetailComponent,
-    UserCreateComponent
+    UserCreateComponent,
+    TestsCreateComponent,
+    TestsDetailComponent,
+    IncorrectRouteComponent,
+    TestsEditComponent,
+    SuccessDialogComponent,
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
-    FormsModule
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatDialogModule,
+    MatListModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    FlexLayoutModule
   ],
-  providers: [ ApiService, UserapiService ],
-  bootstrap: [AppComponent]
+  providers: [ApiService, UserapiService],
+  bootstrap: [AppComponent],
+  entryComponents: [SuccessDialogComponent]
 })
-export class AppModule { }
+export class AppModule {}
