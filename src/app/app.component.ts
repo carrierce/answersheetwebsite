@@ -8,7 +8,7 @@ import { AuthenticationService } from './authentication.service';
 })
 export class AppComponent {
   title = 'Exam Keys';
-  constructor(private auth: AuthenticationService) {}
+  constructor(public auth: AuthenticationService) {}
 
   logOut() {
     this.auth.logOut();
