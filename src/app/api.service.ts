@@ -44,6 +44,7 @@ export class ApiService {
 
     getDetailTest(examId): Observable<any> {
         const apiUrlWithId = apiUrl + '/' + examId;
+        // api/exams/examId GET
         return this.http.get(apiUrlWithId, {
             headers: new HttpHeaders()
                 .set('x-auth-token', this.auth.getToken())
