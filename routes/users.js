@@ -12,6 +12,15 @@ router.get('/me', auth, async (req, res) => {
   res.send(user);
 });
 
+router.get('/', (req, res, next) => {
+  User.find((err, allUsersData)=>{
+    if (err) {
+      return next(err);
+    }
+    res.json(allUsersData);
+  });
+});
+
 router.post('/', async (req, res) => {
   let user = await User.findOne({ email: req.body.email });
   if (user) return res.status(400).send('User already registered.');
