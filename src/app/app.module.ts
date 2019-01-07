@@ -30,6 +30,7 @@ import { SuccessDialogComponent } from './success-dialog/success-dialog.componen
 import { RegisterComponent } from './register/register.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LoginComponent } from './login/login.component';
+import { UserAdminComponent } from './user-admin/user-admin.component';
 
 // Below we specify the frontend routes,
 // this is an array of all front-end routes.
@@ -70,6 +71,10 @@ const appRoutes: Routes = [
     path: 'user-create',
     component: UserCreateComponent
   },
+  {
+    path: 'user-admin',
+    component: UserAdminComponent
+  },
   // below we define the default route if no route is given
   // pathMatch
   {
@@ -96,7 +101,8 @@ const appRoutes: Routes = [
     TestsEditComponent,
     SuccessDialogComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    UserAdminComponent
   ],
   imports: [
     BrowserModule,
@@ -113,7 +119,7 @@ const appRoutes: Routes = [
     MatIconModule,
     MatSidenavModule,
     MatToolbarModule,
-    FlexLayoutModule
+    FlexLayoutModule,
   ],
   providers: [ApiService, UserapiService],
   bootstrap: [AppComponent],
