@@ -1,3 +1,6 @@
-<p>
-  user-admin works!
-</p>
+<div class="container">
+  <div class="user-data-display" *ngFor="let user of users">
+    <h1 class="mat-h1">User Name: {{ user.name }}</h1>
+    <h2 class="mat-h2">Is this user an admin?: {{ user.isAdmin }}</h2>
+  </div>  
+</div>
