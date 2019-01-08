@@ -28,8 +28,8 @@ export class UserAdminComponent implements OnInit {
     }
   }
 
-  toggleAdminStatus() {
-    console.log('true');
+  toggleAdminStatus(i) {
+    this.users[i].isAdmin = !this.users[i].isAdmin;
   }
 
 }
