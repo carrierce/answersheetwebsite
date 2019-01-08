@@ -14,10 +14,22 @@ export class UserAdminComponent implements OnInit {
   }
 
   fetchUsers() {
-    this.api.getUser().subscribe((res) => {
+    this.api.getUsers().subscribe((res) => {
       this.users = res;
-      console.log(this.users);
+      this.checkAdminStatus(this.users);
     });
+  }
+
+  checkAdminStatus(users) {
+    for (let i = 0; i < users.length; i++) {
+      if (!users[i].hasOwnProperty('isAdmin')) {
+        users[i].isAdmin = false;
+      }
+    }
+  }
+
+  toggleAdminStatus() {
+    console.log('true');
   }
 
 }

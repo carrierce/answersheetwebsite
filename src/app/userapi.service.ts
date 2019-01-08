@@ -16,7 +16,7 @@ export class UserapiService {
 
   constructor(private http: HttpClient, private auth: AuthenticationService) { }
 
-  getUser(): Observable<any> {
+  getUsers(): Observable<any> {
     return this.http.get(apiUrl, httpOptions);
   }
 
@@ -33,6 +33,15 @@ export class UserapiService {
     const deleteUserUrl = apiUrl + '/' + id;
     console.log(deleteUserUrl);
     return this.http.delete(deleteUserUrl, httpOptions);
+  }
+
+  toggleUserAdminStatus(userId, updatedAdminStatus): Observable<any> {
+    const apiUrlWithId = apiUrl + '/' + userId;
+    return this.http.put(apiUrlWithId, updatedAdminStatus, {
+        headers: new HttpHeaders()
+                .set('x-auth-token', this.auth.getToken())
+                .set('Content-Type', 'application/json')
+        });
   }
 
 }
