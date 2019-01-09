@@ -19,6 +19,10 @@ export class UserAdminComponent implements OnInit {
       this.checkAdminStatus(this.users);
     });
   }
+  // fetchUsers function makes a get request that gets all the users from the db and assigns them
+  // to the variable users in the front end,
+  // within this function checkAdminStatus is called to ensure that any user in the back that lacks
+  // an isAdmin status in the backend is assigned on in the front end users var for display purposes.
 
   checkAdminStatus(users) {
     for (let i = 0; i < users.length; i++) {
@@ -27,9 +31,16 @@ export class UserAdminComponent implements OnInit {
       }
     }
   }
+  // checkAdminStatus function simply is used for ensuring that any users object that does not have
+  // is isAdmin status in the backend is assigned one as false in the front end for display purposes.
 
-  toggleAdminStatus(i) {
-    this.users[i].isAdmin = !this.users[i].isAdmin;
+  toggleUserAdminStatus(i) {
+    this.api.toggleUserAdminStatus(i, this.users).subscribe((res) => {
+    });
   }
+  // toggleUserAdminStatus is called onClick and takes all the the index of the given
+  // user being clicked on as a parameter & then passes that into the toggleUserAdminStatus
+  // api function
+
 
 }

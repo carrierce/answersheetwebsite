@@ -40,4 +40,22 @@ router.post('/', async (req, res) => {
   res.header('x-auth-token', token).send(_.pick(user, ['_id', 'name', 'email']));
 });
 
+router.put('/:id', auth, (req, res, next) => {
+  User.findByIdAndUpdate(req.params.id, req.body, (err, post) => {
+    if (err) {
+      return next(err);
+    } 
+    
+    res.json(post);
+  });
+});
+// this function does a put, whose route is the base route plus a concatenated :id (I THINK)
+// we then have an auth, which simply checks if the user is logged in (I THINK I SHOULD ADD IN ADMIN AS WELL AS A BACKEND CHECK)
+// then we have a call back with a 3 variables, req, res, next, the req is what is being passed in from
+// the userapi.service.ts (I THINK) and is simply the specific user.
+// then we do a User.findByIdAndUpdate (I presume we use User because since it is mongoose it has access that function)
+// fbiau takes a range a of parameters that we pass it-- the id of where we update and the body of text to be updated
+// then we have a call back. and the res of our outer called from router.put is assigned the content we post the backend.
+
+
 module.exports = router;
