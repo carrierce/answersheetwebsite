@@ -21,6 +21,15 @@ router.get('/', (req, res, next) => {
   });
 });
 
+router.get('/:id', (req, res, next) => {
+    User.findById(req.params.id,(err, selectUserData) => {
+    if (err) {
+      return next(err);
+    }    
+    res.json(selectUserData);
+  });
+})
+
 router.post('/', async (req, res) => {
   let user = await User.findOne({ email: req.body.email });
   if (user) return res.status(400).send('User already registered.');

@@ -13,4 +13,10 @@ export class AppComponent {
   logOut() {
     this.auth.logOut();
   }
+
+  checkAdminStatus() {
+    this.auth.checkAdminStatus().subscribe((res) => {
+      console.log(res);
+    });
+  }
 }

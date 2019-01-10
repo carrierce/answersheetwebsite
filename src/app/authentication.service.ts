@@ -5,7 +5,10 @@ import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'x-auth-token' }, )
+  headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'x-auth-token'
+  })
 };
 
 @Injectable({
@@ -68,6 +71,7 @@ export class AuthenticationService {
   }
 
   loginUser(user): Observable<any> {
+    console.log('loginUser ' + user);
     return this.http.post(this.loginApi, user, {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/json'),
@@ -76,4 +80,19 @@ export class AuthenticationService {
       this.saveToken(res.headers.get('x-auth-token'));
     }));
   }
+
+  public checkAdminStatus(): Observable<any> {
+    const user = this.getUserDetails();
+    const userID = user._id;
+    const getUser = this.registerApi + '/' + userID;
+    console.log(getUser);
+    return this.http.get(getUser, httpOptions);
+  }
+
+// getSingleUser(id): Observable<any> {
+//   const getUser = apiUrl + '/' + id;
+//   return this.http.get(getUser, httpOptions);
+// }
+
 }
+
