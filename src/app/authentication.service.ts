@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 const httpOptions = {
@@ -10,6 +10,7 @@ const httpOptions = {
       'Authorization': 'x-auth-token'
   })
 };
+
 
 @Injectable({
   providedIn: 'root'
@@ -60,6 +61,17 @@ export class AuthenticationService {
     this.router.navigate(['/tests']);
   }
 
+  public getAdminStatus(): Observable<any> {
+    const user = this.getUserDetails();
+    const userID = user._id;
+    const getUser = this.registerApi + '/' + userID;
+    return this.http.get(getUser, httpOptions);
+  }
+
+  // since i cant pipe in a subscription maybe I need to pipe what is returned here.
+  // look at the register user function for inspiration
+
+
   registerUser(user): Observable<any> {
     return this.http.post(this.registerApi, user, {
         headers: new HttpHeaders()
@@ -71,7 +83,6 @@ export class AuthenticationService {
   }
 
   loginUser(user): Observable<any> {
-    console.log('loginUser ' + user);
     return this.http.post(this.loginApi, user, {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/json'),
@@ -81,18 +92,6 @@ export class AuthenticationService {
     }));
   }
 
-  public checkAdminStatus(): Observable<any> {
-    const user = this.getUserDetails();
-    const userID = user._id;
-    const getUser = this.registerApi + '/' + userID;
-    console.log(getUser);
-    return this.http.get(getUser, httpOptions);
-  }
-
-// getSingleUser(id): Observable<any> {
-//   const getUser = apiUrl + '/' + id;
-//   return this.http.get(getUser, httpOptions);
-// }
 
 }
 

@@ -8,15 +8,16 @@ import { AuthenticationService } from './authentication.service';
 })
 export class AppComponent {
   title = 'Exam Keys';
+  // loggedInUser = '';
   constructor(public auth: AuthenticationService) {}
 
   logOut() {
     this.auth.logOut();
   }
 
-  checkAdminStatus() {
-    this.auth.checkAdminStatus().subscribe((res) => {
-      console.log(res);
+  isAdmin() {
+    this.auth.getAdminStatus().subscribe(res => {
+      console.log(res.isAdmin);
     });
   }
 }
