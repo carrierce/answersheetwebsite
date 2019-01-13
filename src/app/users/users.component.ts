@@ -12,7 +12,7 @@ export class UsersComponent implements OnInit {
   constructor( private api: UserapiService ) { }
 
   ngOnInit() {
-    this.api.getUser().subscribe((res) => {
+    this.api.getUsers().subscribe((res) => {
       this.users = res;
     });
   }

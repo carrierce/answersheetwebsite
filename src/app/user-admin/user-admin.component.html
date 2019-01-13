@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="user-data-display" *ngFor="let user of users; let i = index" >
+    <h1 class="mat-h1">User Name: {{ user.name }}</h1>
+    <h2 class="mat-h2">User Id: {{ user._id }}</h2>
+    <h2 class="mat-h2">Is this user an admin?: {{ user.isAdmin }}</h2>
+    <br>
+    <button type="button" mat-raised-button color="primary" (click)="toggleUserAdminStatus(i)">Toggle Admin Status</button>
+    <!-- replace  toggleUserAdminStatus(i) with toggleUserAdminStatus(user._id)-->
+    <!-- because that saves me from having to extract the _id later -->
+    <!-- this allows me to pass only only 1 user id not the whole user object -->
+    <hr>
+  </div>  
+</div>

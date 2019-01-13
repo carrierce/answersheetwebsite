@@ -5,7 +5,10 @@ import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'x-auth-token' }, )
+  headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'x-auth-token'
+  })
 };
 
 @Injectable({
@@ -39,6 +42,19 @@ export class AuthenticationService {
       return JSON.parse(payload);
     } else {
       return null;
+    }
+  }
+
+  public isAdmin(): boolean {
+    const user = this.getUserDetails();
+    if (user) {
+      if (user.exp > Date.now() / 1000 && user.isAdmin) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
     }
   }
 
@@ -76,4 +92,7 @@ export class AuthenticationService {
       this.saveToken(res.headers.get('x-auth-token'));
     }));
   }
+
+
 }
+

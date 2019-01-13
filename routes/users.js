@@ -12,6 +12,30 @@ router.get('/me', auth, async (req, res) => {
   res.send(user);
 });
 
+router.get('/', (req, res, next) => {
+  // const users = await User.find().select('-password');
+  let query = User.find({}).select('-password');
+  // in SQL you write a query to the DB then execute it.
+  // today you write and execute a query in 1 step.
+  // query.exec lets us recreate that 2 step process.
+  // if a query gets long make it into a 2 step process.
+  query.exec((err, allUsersData)=>{
+      if (err) {
+        return next(err);
+      }
+      res.json(allUsersData);
+    });
+});
+
+router.get('/:id', (req, res, next) => {
+    User.findById(req.params.id,(err, selectUserData) => {
+    if (err) {
+      return next(err);
+    }    
+    res.json(selectUserData);
+  });
+})
+
 router.post('/', async (req, res) => {
   let user = await User.findOne({ email: req.body.email });
   if (user) return res.status(400).send('User already registered.');
@@ -30,5 +54,23 @@ router.post('/', async (req, res) => {
   const token = user.generateAuthToken();
   res.header('x-auth-token', token).send(_.pick(user, ['_id', 'name', 'email']));
 });
+
+router.put('/:id', auth, (req, res, next) => {
+  User.findByIdAndUpdate(req.params.id, req.body, (err, post) => {
+    if (err) {
+      return next(err);
+    } 
+    
+    res.json(post);
+  });
+});
+// this function does a put, whose route is the base route plus a concatenated :id (I THINK)
+// we then have an auth, which simply checks if the user is logged in (I THINK I SHOULD ADD IN ADMIN AS WELL AS A BACKEND CHECK)
+// then we have a call back with a 3 variables, req, res, next, the req is what is being passed in from
+// the userapi.service.ts (I THINK) and is simply the specific user.
+// then we do a User.findByIdAndUpdate (I presume we use User because since it is mongoose it has access that function)
+// fbiau takes a range a of parameters that we pass it-- the id of where we update and the body of text to be updated
+// then we have a call back. and the res of our outer called from router.put is assigned the content we post the backend.
+
 
 module.exports = router;
