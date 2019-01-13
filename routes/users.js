@@ -13,12 +13,18 @@ router.get('/me', auth, async (req, res) => {
 });
 
 router.get('/', (req, res, next) => {
-  User.find((err, allUsersData)=>{
-    if (err) {
-      return next(err);
-    }
-    res.json(allUsersData);
-  });
+  // const users = await User.find().select('-password');
+  let query = User.find({}).select('-password');
+  // in SQL you write a query to the DB then execute it.
+  // today you write and execute a query in 1 step.
+  // query.exec lets us recreate that 2 step process.
+  // if a query gets long make it into a 2 step process.
+  query.exec((err, allUsersData)=>{
+      if (err) {
+        return next(err);
+      }
+      res.json(allUsersData);
+    });
 });
 
 router.get('/:id', (req, res, next) => {

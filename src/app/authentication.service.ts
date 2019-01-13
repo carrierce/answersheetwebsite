@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 const httpOptions = {
@@ -10,7 +10,6 @@ const httpOptions = {
       'Authorization': 'x-auth-token'
   })
 };
-
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +45,19 @@ export class AuthenticationService {
     }
   }
 
+  public isAdmin(): boolean {
+    const user = this.getUserDetails();
+    if (user) {
+      if (user.exp > Date.now() / 1000 && user.isAdmin) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
   public isLoggedIn(): boolean {
     const user = this.getUserDetails();
     if (user) {
@@ -60,17 +72,6 @@ export class AuthenticationService {
     window.localStorage.removeItem('auth-token');
     this.router.navigate(['/tests']);
   }
-
-  public getAdminStatus(): Observable<any> {
-    const user = this.getUserDetails();
-    const userID = user._id;
-    const getUser = this.registerApi + '/' + userID;
-    return this.http.get(getUser, httpOptions);
-  }
-
-  // since i cant pipe in a subscription maybe I need to pipe what is returned here.
-  // look at the register user function for inspiration
-
 
   registerUser(user): Observable<any> {
     return this.http.post(this.registerApi, user, {

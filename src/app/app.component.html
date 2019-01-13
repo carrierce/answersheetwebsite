@@ -8,9 +8,8 @@
                 <a *ngIf="!auth.isLoggedIn()" [routerLink]="['/register']" mat-button>Register</a>
                 <a *ngIf="!auth.isLoggedIn()" [routerLink]="['/login']" mat-button>Login</a>
                 <a *ngIf="auth.isLoggedIn()" [routerLink]="['/tests']" mat-button>Welcome!</a>
-                <a *ngIf="auth.isLoggedIn()" [routerLink]="['/user-admin']" mat-button>User Admin!</a>
+                <a *ngIf="auth.isAdmin()" [routerLink]="['/user-admin']" mat-button>User Admin!</a>
                 <a *ngIf="auth.isLoggedIn()" (click)="logOut()" mat-button>Logout</a>
-                <a *ngIf="auth.isLoggedIn()" (click)="isAdmin()" mat-button>Is Admin?</a>
                 <a [routerLink]="['/tests']" mat-button>Exam Keys</a>
             </div>
         </mat-toolbar-row>
