@@ -1,18 +1,24 @@
-.menu-spacer {
-    flex: 1 1 auto;
+html {
+    height: 100%;
 }
-
-.main-div {
-    height: 90vh;
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+.main-content {
+    flex: 1 0 auto; 
     min-height: 90vh;
 }
-
-footer {
-    height: 10vh;
-    text-align: center;
-    justify-content: center;
-    border-top: 2px solid black;
+footer { 
     display: flex;
-    align-content: center;
-    align-items: center;
+    justify-content: space-around;
+    flex-shrink: 0;
+    border-top: 1px solid black;
+    flex-flow: row wrap;
+    min-height: 5vh;
+    margin-top: 5vh;
 }
+.footer-text {
+    margin: auto;
+}  
