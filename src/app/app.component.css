@@ -22,3 +22,7 @@ footer {
 .footer-text {
     margin: auto;
 }  
+
+.nav-bar {
+    justify-content: space-between;
+}
