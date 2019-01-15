@@ -1,20 +1,26 @@
-<div class="container">
-  <form #registerForm="ngForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="name">Name</label>
-      <input type="text" class="form-control" name="name" [(ngModel)]="user.name" required>
-    </div>
-    
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="text" class="form-control" name="email" [(ngModel)]="user.email" required>
-    </div>
-
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password" class="form-control" name="password" [(ngModel)]="user.password" required>
-    </div>
-    
-    <button type="submit" class="btn btn-success" [disabled]="!registerForm.form.valid">Submit</button>
+<div class="container mat-typography">
+  <form [formGroup]="userForm" [hidden]="success" (ngSubmit)="submitHandler()">
+      <div class="small-div">
+          <mat-form-field>
+            <input matInput placeholder="Name" formControlName="userName">
+            <mat-error *ngIf="userName.invalid && userName.touched">
+              Exam type can not be empty
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Email" formControlName="userEmail">
+            <mat-error *ngIf="userEmail.invalid && userEmail.touched">
+              Name can not be empty or invalid
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+              <input matInput placeholder="Password" formControlName="userPassword">
+              <mat-error *ngIf="userPassword.invalid && userPassword.touched">
+                Password can not be empty or invalid
+              </mat-error>
+          </mat-form-field>
+      </div>
+        <!-- <button mat-raised-button color="primary" type="submit"
+        [disabled]="examForm.invalid">Submit</button> -->
   </form>
 </div>
