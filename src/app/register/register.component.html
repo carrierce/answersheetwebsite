@@ -14,7 +14,7 @@
             </mat-error>
           </mat-form-field>
           <mat-form-field>
-              <input matInput placeholder="Password" formControlName="userPassword">
+              <input type="password" matInput placeholder="Password" formControlName="userPassword">
               <mat-error *ngIf="userPassword.invalid && userPassword.touched">
                 Password can not be empty or invalid
               </mat-error>
