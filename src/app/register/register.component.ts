@@ -3,6 +3,7 @@ import { AuthenticationService } from '../authentication.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
+import { SuccessDialogComponent } from '../success-dialog/success-dialog.component';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -20,13 +21,18 @@ export class RegisterComponent implements OnInit {
   // };
   success = false;
   loading = false;
-  constructor(private fb: FormBuilder, private auth: AuthenticationService, private router: Router) { }
+  constructor(
+      private fb: FormBuilder,
+      private auth: AuthenticationService,
+      private router: Router,
+      private dialog: MatDialog
+    ) { }
 
   ngOnInit() {
     this.userForm = this.fb.group({
       userName: ['', [Validators.required, Validators.minLength(5)]],
       userEmail: ['', [Validators.required, Validators.email]],
-      userPassword: ['', [Validators.required, Validators.minLength(20)]],
+      userPassword: ['', [Validators.required, Validators.minLength(5)]],
     });
   }
 
@@ -43,20 +49,20 @@ export class RegisterComponent implements OnInit {
   }
 
 
-  // submitHandler() {
-  //   this.loading = true;
-  //   const rawValue = this.userForm.value;
-  //   const jsonValue = JSON.stringify(rawValue);
-  //   this.api.postTest(jsonValue).subscribe((result) => {
-  //     this.loading = false;
-  //     this.success = true;
-  //     this.dialog.open(SuccessDialogComponent);
-  //     this.router.navigate(['/tests']);
-  //     console.log(result);
-  //   }, (error) => {
-  //     this.loading = false;
-  //   });
-  // }
+  submitHandler() {
+    this.loading = true;
+    const rawValue = this.userForm.value;
+    const jsonValue = JSON.stringify(rawValue);
+    this.auth.registerUser(jsonValue).subscribe((result) => {
+      this.loading = false;
+      this.success = true;
+      this.dialog.open(SuccessDialogComponent);
+      this.router.navigate(['/tests']);
+      console.log(result + ' this is the result');
+    }, (error) => {
+      this.loading = false;
+    });
+  }
 
   // onSubmit() {
   //   const userJSON = JSON.stringify(this.user);
