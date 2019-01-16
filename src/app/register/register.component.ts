@@ -58,20 +58,10 @@ export class RegisterComponent implements OnInit {
       this.success = true;
       this.dialog.open(SuccessDialogComponent);
       this.router.navigate(['/tests']);
-      console.log(result + ' this is the result');
+      console.log(result);
     }, (error) => {
       this.loading = false;
     });
   }
-
-  // onSubmit() {
-  //   const userJSON = JSON.stringify(this.user);
-  //   this.auth.registerUser(userJSON).subscribe(result => {
-  //     console.log(this.auth.isLoggedIn());
-  //     this.router.navigate(['/tests']);
-  //   }, err => {
-  //     console.log(err);
-  //   });
-  // }
 
 }
