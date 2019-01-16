@@ -74,6 +74,8 @@ export class AuthenticationService {
   }
 
   registerUser(user): Observable<any> {
+    console.log(user + ' from registerUser');
+    console.log(typeof user);
     return this.http.post(this.registerApi, user, {
         headers: new HttpHeaders()
           .set('Content-Type', 'application/json'),
