@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { SuccessDialogComponent } from '../success-dialog/success-dialog.component';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -13,12 +12,6 @@ import { Observable } from 'rxjs';
 })
 export class RegisterComponent implements OnInit {
   userForm: FormGroup;
-  // user = {
-  //   name: '',
-  //   email: '',
-  //   password: '',
-  //   isAdmin: false
-  // };
   success = false;
   loading = false;
   constructor(
