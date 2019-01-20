@@ -5,7 +5,7 @@
     <h3 class="mat-h3">{{ section.sectionType}}</h3>
     <div class="question-section-display">
       <div class="questions-display" *ngFor="let question of section?.questions; let i = index">
-        <p class="mat-body"><span>Q</span>{{ i+1 }}: {{ question.answer | uppercase }}</p>
+        <p class="mat-body" class="question"><span class="question-span">Q{{ i+1 }}:</span> {{ question.answer | uppercase }}</p>
       </div>
     </div>
   </div>

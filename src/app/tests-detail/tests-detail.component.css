@@ -1,7 +1,10 @@
 .question-section-display {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     margin-bottom: 5px;
+    border-bottom: solid black 1px;
+    flex-wrap: wrap;
+    padding-bottom: 5px;
 }
 
 .test-detail-display
@@ -9,4 +12,12 @@
     max-width: 80%;
     width: 80%;
     margin: 0 auto;
+}
+
+.question {
+    padding: 5px;
+}
+
+.question-span {
+    font-weight: bold;
 }
