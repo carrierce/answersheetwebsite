@@ -21,7 +21,7 @@ app.use('*', express.static(path.join(__dirname, 'dist/AnswerSheetWebsite')));
 // SERVER CONNECTION
 mongoose
   .connect(
-    "mongodb+srv://charlescarrier:12345@cluster0-1kiiw.mongodb.net/answersheetwebsite?retryWrites=true",
+    "mongodb+srv://charlescarrier:"+ process.env.DB_PASS +"@cluster0-1kiiw.mongodb.net/answersheetwebsite?retryWrites=true",
     {
       useNewUrlParser: true
     }
