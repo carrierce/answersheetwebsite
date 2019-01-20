@@ -47,7 +47,6 @@ export class ApiService {
         // api/exams/examId GET
         return this.http.get(apiUrlWithId, {
             headers: new HttpHeaders()
-                .set('x-auth-token', this.auth.getToken())
                 .set('Content-Type', 'application/json')
         });
     }
