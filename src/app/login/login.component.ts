@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { MatDialog } from '@angular/material';
+import { SuccessDialogComponent } from '../success-dialog/success-dialog.component';
 
 @Component({
     selector: 'app-login',
@@ -13,7 +15,7 @@ export class LoginComponent implements OnInit {
         email: '',
         password: ''
     };
-    constructor(private auth: AuthenticationService, private router: Router) { }
+    constructor(private auth: AuthenticationService, private router: Router, private dialog: MatDialog) { }
 
     ngOnInit() {}
 
@@ -26,6 +28,8 @@ export class LoginComponent implements OnInit {
             },
             err => {
                 console.log(err);
+                this.dialog.open(SuccessDialogComponent);
+
             }
         );
     }
