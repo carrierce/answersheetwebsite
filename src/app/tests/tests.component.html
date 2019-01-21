@@ -7,17 +7,17 @@
       </button>
     </a>
     <a [routerLink]="['/test-edit', test._id]">
-      <button mat-raised-button color="primary" type="button">
+      <button *ngIf="auth.isLoggedIn()" mat-raised-button color="primary" type="button">
         Edit Test
       </button>
     </a>
-    <button type="button" (click)="deleteExam(test._id)" mat-raised-button color="warn">
+    <button *ngIf="auth.isAdmin()" type="button" (click)="deleteExam(test._id)" mat-raised-button color="warn">
       Delete Exam
     </button>
     <hr>
   </div>
   <a [routerLink]="['/tests-create']">
-    <button mat-raised-button color="primary" type="button">
+    <button *ngIf="auth.isLoggedIn()" mat-raised-button color="primary" type="button">
       Create Test
     </button>
   </a>

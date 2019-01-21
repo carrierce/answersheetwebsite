@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { AuthenticationService } from '../authentication.service';
 
 @Component({
   selector: 'app-tests',
@@ -9,7 +10,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 })
 export class TestsComponent implements OnInit {
   tests: any;
-  constructor( private api: ApiService ) { }
+  constructor( private api: ApiService, public auth: AuthenticationService) { }
 
   ngOnInit() {
     this.fetchData();
