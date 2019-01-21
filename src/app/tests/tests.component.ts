@@ -10,7 +10,7 @@ import { AuthenticationService } from '../authentication.service';
 })
 export class TestsComponent implements OnInit {
   tests: any;
-  constructor( private api: ApiService, public auth: AuthenticationService) { }
+  constructor( private api: ApiService, public auth: AuthenticationService ) { }
 
   ngOnInit() {
     this.fetchData();
