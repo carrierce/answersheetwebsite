@@ -31,6 +31,7 @@ import { RegisterComponent } from './register/register.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LoginComponent } from './login/login.component';
 import { UserAdminComponent } from './user-admin/user-admin.component';
+import { LoginerrorDialogComponent } from './loginerror-dialog/loginerror-dialog.component';
 
 // Below we specify the frontend routes,
 // this is an array of all front-end routes.
@@ -102,7 +103,8 @@ const appRoutes: Routes = [
     SuccessDialogComponent,
     RegisterComponent,
     LoginComponent,
-    UserAdminComponent
+    UserAdminComponent,
+    LoginerrorDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -123,6 +125,6 @@ const appRoutes: Routes = [
   ],
   providers: [ApiService, UserapiService],
   bootstrap: [AppComponent],
-  entryComponents: [SuccessDialogComponent]
+  entryComponents: [SuccessDialogComponent, LoginerrorDialogComponent]
 })
 export class AppModule {}

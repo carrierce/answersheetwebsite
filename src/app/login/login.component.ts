@@ -3,8 +3,7 @@ import { AuthenticationService } from '../authentication.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material';
-import { SuccessDialogComponent } from '../success-dialog/success-dialog.component';
-
+import { LoginerrorDialogComponent } from '../loginerror-dialog/loginerror-dialog.component';
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
@@ -28,7 +27,9 @@ export class LoginComponent implements OnInit {
             },
             err => {
                 console.log(err);
-                this.dialog.open(SuccessDialogComponent);
+                this.dialog.open(LoginerrorDialogComponent);
+                this.user.email = '';
+                this.user.password = '';
 
             }
         );
